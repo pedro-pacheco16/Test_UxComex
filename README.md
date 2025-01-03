@@ -1,7 +1,7 @@
 # Projeto de Cadastro e Gerenciamento de Pessoas e Endereços - ASP.NET MVC
 Este projeto foi desenvolvido como parte de um teste técnico, implementando funcionalidades básicas de cadastro e gerenciamento de pessoas e endereços utilizando a arquitetura ASP.NET MVC. Ele foi criado para atender aos requisitos descritos, oferecendo uma interface amigável para CRUD de pessoas e endereços.
 
-Funcionalidades
+# Funcionalidades
 Tela de Listagem de Pessoas
 Listagem: Exibe todos os cadastros de pessoas com seus respectivos nomes.
 Botão "+ Cadastro": Permite a navegação para a tela de criação de um novo cadastro.
