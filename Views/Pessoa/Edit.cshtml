@@ -1,0 +1,107 @@
+﻿@model Teste_UxComex.ViewModels.PessoaViewModel
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Pessoa.PessoaId" />
+    <div class="form-group">
+        <label asp-for="Pessoa.Nome" class="control-label"></label>
+        <input asp-for="Pessoa.Nome" class="form-control" />
+        <span asp-validation-for="Pessoa.Nome" class="text-danger"></span>
+
+        <label asp-for="Pessoa.Telefone" class="control-label"></label>
+        <input asp-for="Pessoa.Telefone" class="form-control" />
+        <span asp-validation-for="Pessoa.Telefone" class="text-danger"></span>
+
+        <label asp-for="Pessoa.CPF" class="control-label"></label>
+        <input asp-for="Pessoa.CPF" class="form-control" />
+        <span asp-validation-for="Pessoa.CPF" class="text-danger"></span>
+
+    </div>
+    <!-- Outras propriedades de Pessoa... -->
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<!-- Listagem de Endereços -->
+<h3>Endereços Cadastrados</h3>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#EnderecoModal">+ Endereço</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Endereço</th>
+            <th>CEP</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Enderecos != null && Model.Enderecos.Any())
+        {
+            foreach (var endereco in Model.Enderecos)
+            {
+                <tr>
+                    <td>@endereco.EnderecoCompleto</td>
+                    <td>@endereco.CEP</td>
+                    <td>@endereco.Cidade</td>
+                    <td>@endereco.Estado</td>
+                    <td>
+                        <a href="@Url.Action("DeleteEndereco", "Endereco", new { id = endereco.EnderecoId })"
+                           onclick="return confirm('Tem certeza que deseja excluir?');">X</a>
+
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr id="no-address-message">
+                <td colspan="5" class="text-center">Nenhum endereço cadastrado.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="EnderecoModal" tabindex="-1" role="dialog" aria-labelledby="EnderecoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EnderecoModalLabel">Cadastro de Endereço</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-for="Endereco" asp-action="CreateEndereco" method="post" id="formEndereco">
+                    <div class="form-group">
+                        <label class="control-label">CEP</label>
+                        <input class="form-control" id="cep" name="Cep" placeholder="Digite o CEP" required />
+                        <small class="form-text text-muted">Digite o CEP para buscar o endereço automaticamente.</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Endereço</label>
+                        <input class="form-control" id="endereco" name="EnderecoCompleto" placeholder="Endereço" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Cidade</label>
+                        <input class="form-control" id="cidade" name="Cidade" placeholder="Cidade" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Estado</label>
+                        <input class="form-control" id="estado" name="Estado" placeholder="Estado" required />
+                    </div>
+
+                    <input type="hidden" value="@Model.Pessoa.PessoaId" id="pessoa" name="PessoaId" />
+
+
+                    <button type="button" class="btn btn-success" id="salvarEndereco">Cadastrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

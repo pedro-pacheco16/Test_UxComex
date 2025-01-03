@@ -1,0 +1,38 @@
+﻿@model Teste_UxComex.Models.Endereco
+
+@{
+    ViewData["Title"] = "Editar Endereço";
+}
+
+<h1>Editar Endereço</h1>
+
+<form asp-action="Edit" method="post">
+    <!-- Campo oculto para o ID do endereço -->
+    <input type="hidden" asp-for="EnderecoId" />
+    <div class="form-group">
+        <label asp-for="EnderecoCompleto"></label>
+        <input class="form-control" asp-for="EnderecoCompleto" placeholder="Digite o Endereço" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CEP"></label>
+        <input class="form-control" asp-for="CEP" placeholder="Digite o CEP" required />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Cidade"></label>
+        <input class="form-control" asp-for="Cidade" placeholder="Digite a Cidade" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Estado"></label>
+        <input class="form-control" asp-for="Estado" placeholder="Digite o Estado" required />
+    </div>
+
+    <!-- Campo oculto para associar o endereço a uma pessoa -->
+    <input type="hidden" asp-for="PessoaId" />
+
+    <button type="submit" class="btn btn-success">Salvar Alterações</button>
+    <a asp-action="Index" asp-route-pessoaId="@Model.PessoaId" class="btn btn-secondary">Cancelar</a>
+</form>

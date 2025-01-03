@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Teste_UxComex.Models.Endereco>
+
+@{
+    ViewData["Title"] = "Endereços";
+}
+
+<h1>Endereços</h1>
+<p>
+    <a href="@Url.Action("Create", "Endereco", new { pessoaId = ViewData["PessoaId"] })" class="btn btn-primary">+ Cadastro de Endereço</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Endereço Completo</th>
+            <th>CEP</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var endereco in Model)
+        {
+            <tr>
+                <td>@endereco.EnderecoCompleto</td>
+                <td>@endereco.CEP</td>
+                <td>@endereco.Cidade</td>
+                <td>@endereco.Estado</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Endereco", new { id = endereco.EnderecoId })" class="btn btn-warning">Editar</a>
+                    <a href="@Url.Action("Delete", "Endereco", new { id = endereco.EnderecoId })" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
